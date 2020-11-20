@@ -16,6 +16,7 @@
     <Layout class="main-app-layout--right">
       <layout-header class="main-app-layout__header"></layout-header>
       <Content class="main-app-layout__content">
+
         <router-view class="admin-layout_content"></router-view>
         <!-- <router-view class="component child-demo" v-show="$route.name" /> -->
       </Content>
@@ -23,7 +24,7 @@
   </Layout>
 </template>
 <style lang="scss" src="./layout.scss" scoped></style>
-<script lang="ts" src="./layout.ts"></script>>
+<script lang="ts" src="./layout.ts"></script>
 <style lang="scss">
 @import "~@/assets/styles/index.scss";
 .fade-enter-active,
