@@ -1,12 +1,14 @@
 import { AjaxResult, IAjaxResult } from "@/shared/response";
 import { Component, Emit, Vue } from "vue-property-decorator";
+import { GetUserInfo, UserInfoModule } from "@/store/modules/userinfomodule";
 
 import ApplicationUserManager from "@/shared/config/IdentityServerLogin";
 import DestinyCoreModule from "@/shared/core/DestinyCoreModule";
-import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
 import { MainManager } from "@/domain/services/main/main-manager";
 import { MenuModule } from "@/store/modules/menumodule";
 import { TokenModule } from "@/store/modules/tokenmodule";
+
+// import { IChangePassInputDto } from "@/domain/entity/core/ChangePassInputDto";
 
 @Component({
   name: "LayoutHeader",
@@ -15,6 +17,8 @@ export default class LayoutHeader extends Vue {
   DestinyCoreModule: any;
   private LogOut() {
     TokenModule.ResetToken();
+    MenuModule.RemoveMenus();
+    UserInfoModule.RemoveUserInfo();
     ApplicationUserManager.Logout();
     this.$router.push({
       path: "/login",
@@ -22,10 +26,7 @@ export default class LayoutHeader extends Vue {
   }
 
   private GetUserName() {
-    const key =
-      "oidc.user:https://auth.destinycore.club:DestinyCoreFlowReactClient";
-    const ids4Info = sessionStorage.getItem(key) as any;
-    return JSON.parse(ids4Info).profile.name;
+    return JSON.parse(GetUserInfo()).nikename;
   }
 
   private formCustom: any = {
@@ -70,33 +71,37 @@ export default class LayoutHeader extends Vue {
     (this.$refs["formCustom"] as any).resetFields();
   }
 
-  handleSubmit(name: string) {
-    (this.$refs[name] as any).validate((valid: any) => {
-      if (valid) {
-        let dto: IChangePassInputDto = {
-          newPassword: this.formCustom.newPassword,
-          oldPassword: this.formCustom.oldPassword,
-        };
-        MainManager.Instance()
-          .SystemService.changePassword(dto)
-          .then((result: IAjaxResult) => {
-            DestinyCoreModule.ToAjaxResult(
-              result,
-              () => {
-                this.isOpen = false;
-                this.LogOut();
-              },
-              () => {
-                this.isOpen = true;
-              }
-            );
-          })
-      }
-    });
-  }
+  // handleSubmit(name: string) {
+  //   (this.$refs[name] as any).validate((valid: any) => {
+  //     if (valid) {
+  //       let dto: IChangePassInputDto = {
+  //         newPassword: this.formCustom.newPassword,
+  //         oldPassword: this.formCustom.oldPassword,
+  //       };
+  //       MainManager.Instance()
+  //         .SystemService.changePassword(dto)
+  //         .then((result: IAjaxResult) => {
+  //           DestinyCoreModule.ToAjaxResult(
+  //             result,
+  //             () => {
+  //               this.isOpen = false;
+  //               this.LogOut();
+  //             },
+  //             () => {
+  //               this.isOpen = true;
+  //             }
+  //           );
+  //         })
+  //     }
+  //   });
+  // }
 
   handleReset() {
     this.isOpen = false;
     (this.$refs["formCustom"] as any).resetFields();
+  }
+
+  openGit() {
+    window.open("https://github.com/DestinyCore/Destiny.Core.Flow");
   }
 }

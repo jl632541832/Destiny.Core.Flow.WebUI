@@ -135,9 +135,10 @@ export interface ISearchFilter extends IFilterCondition {
   dataType?: string;
 
   /**
-   * 控件配置,如何空就默认text
+   * 控件配置,如果空就默认text
    */
   config?: ControlConfig;
+
 }
 
 //控件配置，一般用来select,tre等格外配置
@@ -146,7 +147,7 @@ export class ControlConfig {
   type: ControlTypeEnum=ControlTypeEnum.select;
 
   //控件数据
-  data?: ISelectListItem[] | string | undefined;
+  data?: ISelectListItem[] | string | undefined | number;
 
   //控件URL，某些控件需要请求提交数据的
   url?: string | undefined;

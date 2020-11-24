@@ -1,6 +1,14 @@
 <template>
   <Header class="main-app-layout__header">
-    <div>欢迎您 {{ GetUserName() }}</div>
+    <div>
+      欢迎您 {{ GetUserName() }}
+      <Tooltip content="点击后跳到git上" placement="top-end">
+        <span style="margin-left: 21px;" @click="openGit()"
+          ><Icon type="logo-github" size="30"
+        /></span>
+      </Tooltip>
+    </div>
+
     <Dropdown>
       <a href="javascript:void(0)">
         <img
@@ -14,13 +22,13 @@
       </a>
       <template v-slot:list>
         <DropdownMenu>
-          <DropdownItem @click.native="OpenUpdatePaw">修改密码</DropdownItem>
+          <!-- <DropdownItem @click.native="OpenUpdatePaw">修改密码</DropdownItem> -->
           <DropdownItem @click.native="LogOut">安全退出</DropdownItem>
         </DropdownMenu>
       </template>
     </Dropdown>
 
-    <template>
+    <!-- <template>
       <Modal v-model="isOpen" :title="title">
         <Form
           ref="formCustom"
@@ -45,7 +53,7 @@
              <Button @click="handleReset()" style="margin-left: 8px">取消</Button>
         </div>
       </Modal>
-    </template>
+    </template> -->
   </Header>
 </template>
 <style lang="scss" src="./layout-header.scss" scoped></style>
