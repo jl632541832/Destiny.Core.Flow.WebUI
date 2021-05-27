@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.8",
     "@types/echarts": "^4.9.1",
     "ant-design-vue": "^1.7.0",
     "axios": "^0.20.0",
@@ -23,6 +24,7 @@
     "sass-loader": "^10.0.3",
     "save": "^2.4.0",
     "scss-loader": "^0.0.1",
+    "tinymce": "^5.8.0",
     "view-design": "^4.4.0-rc.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
@@ -75,7 +77,8 @@
       ],
       "vue/html-self-closing": "off",
       "no-irregular-whitespace": "off",
-      "no-extra-semi": "off"
+      "no-extra-semi": "off",
+      "vue/no-use-v-if-with-v-for": "off"
     }
   },
   "browserslist": [

@@ -1,18 +1,21 @@
 import DataRequest, { IDataRequest } from "@/shared/data-request";
 
+import { IApiResourceService } from "../IdentityServer4/apiresourceservice/IApiResourceService";
+import { IClientApplicationService } from "../IdentityServer4/clientapplicationsevice/IClientapplicationsevice";
 import { ICodeGeneratorService } from "../codeGeneratorServeice/ICodeGeneratorService";
+import { IDataDictionaryService } from "../dataDictionaryServeice/IDataDictionaryService";
 import { IDestinyCoreServeice } from "../destinycoreserveice/IDestinyCoreServeice";
 import { IFunctionService } from "../functionservice/IFunctionService";
 import { IMenuService } from "../menuserveice/IMenuService";
-import { IOrganizationService } from '../organizationservice/IOrganizationService';
+import { IOrganizationService } from "../organizationservice/IOrganizationService";
 import { IRoleService } from "../roleservice/IRoleService";
 import { ISystemService } from "../systemservice/ISystemService";
 import { IUserService } from "../userservice/IUserService";
 import { IocTypes } from "@/shared/diconfig/ioc-types";
 import { MainService } from "./main-service";
+import {IDocumentTypeServeice} from "../documentTypeServeice/IDocumentTypeServeice";
 import container from "@/shared/diconfig/inversify.config";
 import request from "@/utils/request";
-import { IDataDictionaryService } from '../dataDictionaryServeice/IDataDictionaryService';
 
 export class MainManager {
   //#region  单例
@@ -59,10 +62,21 @@ export class MainManager {
     return this.services.DestinyCoreServeice;
   }
 
-  public get DataDictionarySrevice():IDataDictionaryService{
+  public get DataDictionarySrevice(): IDataDictionaryService {
     return this.services.DataDictionaryService;
   }
 
+  public get ApiResourceService(): IApiResourceService {
+    return this.services.ApiResourceService;
+  }
+  public get ClientApplicationService(): IClientApplicationService {
+    return this.services.ClientApplicationService;
+  }
+
+  public get DocumentTypeServeice():IDocumentTypeServeice{
+
+     return this.services.DocumentTypeServeice;
+  }
   constructor() {
     this.services = container.get<MainService>(IocTypes.MainService);
   }

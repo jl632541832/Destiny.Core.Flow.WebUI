@@ -1,8 +1,10 @@
+import ApiResourceService from '@/domain/services/IdentityServer4/apiresourceservice/ApiResourceService';
 import { CodeGeneratorService } from '@/domain/services/codeGeneratorServeice/CodeGeneratorService';
 import { Container } from "inversify";
 import DataDictionaryService from '@/domain/services/dataDictionaryServeice/DataDictionaryService';
 import DestinyCoreServeice from '@/domain/services/destinycoreserveice/DestinyCoreServeice';
 import FunctionService from '@/domain/services/functionservice/FunctionService';
+import { IApiResourceService } from '@/domain/services/IdentityServer4/apiresourceservice/IApiResourceService';
 import { ICodeGeneratorService } from '@/domain/services/codeGeneratorServeice/ICodeGeneratorService';
 import { IDataDictionaryService } from '../../domain/services/dataDictionaryServeice/IDataDictionaryService';
 import { IDestinyCoreServeice } from '@/domain/services/destinycoreserveice/IDestinyCoreServeice';
@@ -19,7 +21,10 @@ import OrganizationService from '@/domain/services/organizationservice/Organizat
 import RoleService from '@/domain/services/roleservice/RoleService';
 import SystemService from '@/domain/services/systemservice/SystemService';
 import UserService from '@/domain/services/userservice/UserService';
-
+import ClientApplicationService from '@/domain/services/IdentityServer4/clientapplicationsevice/Clientapplicationsevice';
+import { IClientApplicationService } from '@/domain/services/IdentityServer4/clientapplicationsevice/IClientapplicationsevice';
+import {IDocumentTypeServeice} from "@/domain/services/documentTypeServeice/IDocumentTypeServeice";
+import DocumentTypeServeice from '@/domain/services/documentTypeServeice/DocumentTypeServeice';
 const container = new Container();
 container.bind<MainService>(IocTypes.MainService).to(MainService)
 container.bind<IMenuService>(IocTypes.MenuService).to(MenuService)
@@ -30,5 +35,9 @@ container.bind<IFunctionService>(IocTypes.FunctionService).to(FunctionService)
 container.bind<ISystemService>(IocTypes.SystemService).to(SystemService);
 container.bind<IDataDictionaryService>(IocTypes.DataDictionaryService).to(DataDictionaryService)
 container.bind<IOrganizationService>(IocTypes.OrganizationService).to(OrganizationService);
-container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCoreServeice)
+container.bind<IDestinyCoreServeice>(IocTypes.DestinyCoreServeice).to(DestinyCoreServeice);
+container.bind<IApiResourceService>(IocTypes.ApiResourceService).to(ApiResourceService);
+container.bind<IClientApplicationService>(IocTypes.ClientApplicationService).to(ClientApplicationService);
+container.bind<IDocumentTypeServeice>(IocTypes.DocumentTypeServeice).to(DocumentTypeServeice);
+
 export default container;

@@ -16,7 +16,7 @@ export class EditModalMixins extends Vue {
   editData!: any;
 
   isOpen: boolean = false;
-  private form!: any;
+  public form!: any;
   protected InIt() {
     this.GetFormRef();
   }
@@ -47,6 +47,8 @@ export class EditModalMixins extends Vue {
 
   protected MapTo(row: any) {}
 
+  //开始提交
+  protected OnBeforeCommit() {}
   formName: string = "form";
   onHandleCommit() {
     if (!this.form) {
@@ -54,6 +56,7 @@ export class EditModalMixins extends Vue {
     }
     this.form.validate((valid: boolean) => {
       if (valid) {
+        this.OnBeforeCommit();
         this.$emit("saveEdit", this.editData);
       }
     });
